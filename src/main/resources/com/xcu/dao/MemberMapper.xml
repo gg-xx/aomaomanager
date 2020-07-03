@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcu.dao.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.xcu.domain.Member">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="member_alias" jdbcType="VARCHAR" property="memberAlias" />
+    <result column="member_login_name" jdbcType="VARCHAR" property="memberLoginName" />
+    <result column="member_password" jdbcType="VARCHAR" property="memberPassword" />
+    <result column="member_sex" jdbcType="VARCHAR" property="memberSex" />
+    <result column="member_tel" jdbcType="VARCHAR" property="memberTel" />
+    <result column="member_address" jdbcType="VARCHAR" property="memberAddress" />
+    <result column="member_email" jdbcType="VARCHAR" property="memberEmail" />
+    <result column="member_register_time" jdbcType="TIMESTAMP" property="memberRegisterTime" />
+    <result column="member_status" jdbcType="TINYINT" property="memberStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, member_name, member_alias, member_login_name, member_password, member_sex, member_tel, 
+    member_address, member_email, member_register_time, member_status, create_time, creator, 
+    operate_time, operator, delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xcu.domain.Member">
+    insert into t_member (id, member_name, member_alias, 
+      member_login_name, member_password, member_sex, 
+      member_tel, member_address, member_email, 
+      member_register_time, member_status, create_time, 
+      creator, operate_time, operator, 
+      delete_flag)
+    values (#{id,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{memberAlias,jdbcType=VARCHAR}, 
+      #{memberLoginName,jdbcType=VARCHAR}, #{memberPassword,jdbcType=VARCHAR}, #{memberSex,jdbcType=VARCHAR}, 
+      #{memberTel,jdbcType=VARCHAR}, #{memberAddress,jdbcType=VARCHAR}, #{memberEmail,jdbcType=VARCHAR}, 
+      #{memberRegisterTime,jdbcType=TIMESTAMP}, #{memberStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xcu.domain.Member">
+    insert into t_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="memberAlias != null">
+        member_alias,
+      </if>
+      <if test="memberLoginName != null">
+        member_login_name,
+      </if>
+      <if test="memberPassword != null">
+        member_password,
+      </if>
+      <if test="memberSex != null">
+        member_sex,
+      </if>
+      <if test="memberTel != null">
+        member_tel,
+      </if>
+      <if test="memberAddress != null">
+        member_address,
+      </if>
+      <if test="memberEmail != null">
+        member_email,
+      </if>
+      <if test="memberRegisterTime != null">
+        member_register_time,
+      </if>
+      <if test="memberStatus != null">
+        member_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberAlias != null">
+        #{memberAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="memberLoginName != null">
+        #{memberLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPassword != null">
+        #{memberPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSex != null">
+        #{memberSex,jdbcType=VARCHAR},
+      </if>
+      <if test="memberTel != null">
+        #{memberTel,jdbcType=VARCHAR},
+      </if>
+      <if test="memberAddress != null">
+        #{memberAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="memberEmail != null">
+        #{memberEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="memberRegisterTime != null">
+        #{memberRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberStatus != null">
+        #{memberStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xcu.domain.Member">
+    update t_member
+    <set>
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberAlias != null">
+        member_alias = #{memberAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="memberLoginName != null">
+        member_login_name = #{memberLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPassword != null">
+        member_password = #{memberPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSex != null">
+        member_sex = #{memberSex,jdbcType=VARCHAR},
+      </if>
+      <if test="memberTel != null">
+        member_tel = #{memberTel,jdbcType=VARCHAR},
+      </if>
+      <if test="memberAddress != null">
+        member_address = #{memberAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="memberEmail != null">
+        member_email = #{memberEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="memberRegisterTime != null">
+        member_register_time = #{memberRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberStatus != null">
+        member_status = #{memberStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xcu.domain.Member">
+    update t_member
+    set member_name = #{memberName,jdbcType=VARCHAR},
+      member_alias = #{memberAlias,jdbcType=VARCHAR},
+      member_login_name = #{memberLoginName,jdbcType=VARCHAR},
+      member_password = #{memberPassword,jdbcType=VARCHAR},
+      member_sex = #{memberSex,jdbcType=VARCHAR},
+      member_tel = #{memberTel,jdbcType=VARCHAR},
+      member_address = #{memberAddress,jdbcType=VARCHAR},
+      member_email = #{memberEmail,jdbcType=VARCHAR},
+      member_register_time = #{memberRegisterTime,jdbcType=TIMESTAMP},
+      member_status = #{memberStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

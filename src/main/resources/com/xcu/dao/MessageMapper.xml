@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcu.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.xcu.domain.Message">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="message_detail" jdbcType="VARCHAR" property="messageDetail" />
+    <result column="message_time" jdbcType="TIMESTAMP" property="messageTime" />
+    <result column="message_member_id" jdbcType="INTEGER" property="messageMemberId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, message_detail, message_time, message_member_id, create_time, creator, operate_time, 
+    operator, delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xcu.domain.Message">
+    insert into t_message (id, message_detail, message_time, 
+      message_member_id, create_time, creator, 
+      operate_time, operator, delete_flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{messageDetail,jdbcType=VARCHAR}, #{messageTime,jdbcType=TIMESTAMP}, 
+      #{messageMemberId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xcu.domain.Message">
+    insert into t_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="messageDetail != null">
+        message_detail,
+      </if>
+      <if test="messageTime != null">
+        message_time,
+      </if>
+      <if test="messageMemberId != null">
+        message_member_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="messageDetail != null">
+        #{messageDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTime != null">
+        #{messageTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageMemberId != null">
+        #{messageMemberId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xcu.domain.Message">
+    update t_message
+    <set>
+      <if test="messageDetail != null">
+        message_detail = #{messageDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTime != null">
+        message_time = #{messageTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageMemberId != null">
+        message_member_id = #{messageMemberId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xcu.domain.Message">
+    update t_message
+    set message_detail = #{messageDetail,jdbcType=VARCHAR},
+      message_time = #{messageTime,jdbcType=TIMESTAMP},
+      message_member_id = #{messageMemberId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+		    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--开启注解扫描-->
+    <context:component-scan base-package="com.xcu" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+    </context:component-scan>
+    <!--<context:component-scan base-package="com.xcu" />-->
+
+    <!-- 配置swagger资源不被拦截 -->
+    <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
+    <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>
+
+    <!--配置跨域请求-->
+<!--    <mvc:cors>-->
+<!--        <mvc:mapping path="/**/"/>-->
+<!--    </mvc:cors>-->
+    <!--配置跨域访问-->
+    <mvc:cors>
+        <mvc:mapping path="/**" allowed-origins="*" allowed-methods="*" allowed-headers="*" allow-credentials="false" max-age="3600"/>
+    </mvc:cors>
+
+    <!--开启SpringMVC注解的支持-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!--支持AOP的注解支持，AOP底层使用代理技术JDK动态代理，要求必须有接口
+    cglib代理，生成子类对象，proxy-target-class="true" 默认使用cglib的方式 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+</beans>
